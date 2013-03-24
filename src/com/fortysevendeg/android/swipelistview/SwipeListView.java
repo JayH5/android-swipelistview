@@ -169,6 +169,7 @@ public class SwipeListView extends ListView {
             swipeCloseAllItemsWhenMoveList = styled.getBoolean(R.styleable.SwipeListView_swipeCloseAllItemsWhenMoveList, true);
             swipeFrontView = styled.getResourceId(R.styleable.SwipeListView_swipeFrontView, 0);
             swipeBackView = styled.getResourceId(R.styleable.SwipeListView_swipeBackView, 0);
+            styled.recycle();
         }
 
         if (swipeFrontView == 0 || swipeBackView == 0) {

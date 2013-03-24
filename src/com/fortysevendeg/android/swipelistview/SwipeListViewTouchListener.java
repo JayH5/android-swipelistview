@@ -141,7 +141,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
      */
     private void setBackView(View backView) {
         this.backView = backView;
-        backView.setOnClickListener(new View.OnClickListener() {
+        this.backView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 swipeListView.onClickBackView(downPosition);

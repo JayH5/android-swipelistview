@@ -59,18 +59,6 @@ SwipeListView official releases will be made available at Maven Central.
 You can get the releases, snapshots and other forms in which SwipeListView is distributed from the
 [Downloads][5] page.
 
-## Dependencies
-
-SwipeListView depends on the following libraries.
-
-- com.nineoldandroids 
-
-SwipeListView expects that you include one of the Google Android [compatibility libraries][3] in order to use Loaders in versions that do not support them natively.
-Depending on your requirements you may choose to include one of the following...
-
-- com.google.android :
-    - support-v4 (Available in Maven Central)
-
 # Demo
 
 You can see a demo SwipeListView in action at [android-swipelistview-sample][2] or install it from [Google Play][1]

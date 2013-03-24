@@ -20,22 +20,22 @@
 
 package com.fortysevendeg.android.swipelistview;
 
-import android.graphics.Rect;
-import android.os.Handler;
-import android.view.*;
-import android.widget.AbsListView;
-import android.widget.ListView;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.AnimatorListenerAdapter;
-import com.nineoldandroids.animation.ValueAnimator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.nineoldandroids.view.ViewHelper.setAlpha;
-import static com.nineoldandroids.view.ViewHelper.setTranslationX;
-import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
+import android.graphics.Rect;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.ListView;
 
 /**
  * Touch listener impl for the SwipeListView
@@ -342,7 +342,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
             alpha = 0;
         }
 
-        animate(view)
+        view.animate()
                 .translationX(moveTo)
                 .alpha(alpha)
                 .setDuration(animationTime)
@@ -377,7 +377,7 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
             }
         }
 
-        animate(view)
+        view.animate()
                 .translationX(moveTo)
                 .setDuration(animationTime)
                 .setListener(new AnimatorListenerAdapter() {
@@ -635,11 +635,11 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     public void move(float deltaX) {
         swipeListView.onMove(downPosition, deltaX);
         if (swipeCurrentAction == SwipeListView.SWIPE_ACTION_DISMISS) {
-            setTranslationX(parentView, deltaX);
-            setAlpha(parentView, Math.max(0f, Math.min(1f,
+            parentView.setTranslationX(deltaX);
+            parentView.setAlpha(Math.max(0f, Math.min(1f,
                     1f - 2f * Math.abs(deltaX) / viewWidth)));
         } else {
-            setTranslationX(frontView, deltaX);
+            frontView.setTranslationX(deltaX);
         }
     }
 
@@ -691,8 +691,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
                     ViewGroup.LayoutParams lp;
                     for (PendingDismissData pendingDismiss : pendingDismisses) {
                         // Reset view presentation
-                        setAlpha(pendingDismiss.view, 1f);
-                        setTranslationX(pendingDismiss.view, 0);
+                        pendingDismiss.view.setAlpha(1f);
+                        pendingDismiss.view.setTranslationX(0);
                         lp = pendingDismiss.view.getLayoutParams();
                         lp.height = originalHeight;
                         pendingDismiss.view.setLayoutParams(lp);
